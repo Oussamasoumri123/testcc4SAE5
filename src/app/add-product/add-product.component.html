@@ -1,0 +1,63 @@
+<h2>Ajouter un produit</h2>
+<form #productForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+  <!-- Champ Nom -->
+  <div>
+    <label for="name">Nom :</label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      [(ngModel)]="product.name"
+      #name="ngModel"
+      required
+    />
+    <div *ngIf="name.invalid && name.touched" style="color: red">
+      Le champ name est obligatoire.
+    </div>
+  </div>
+
+  <!-- Champ Description -->
+  <div>
+    <label for="description">Description :</label>
+    <input
+      type="text"
+      id="description"
+      name="description"
+      [(ngModel)]="product.description"
+      #description="ngModel"
+      required
+    />
+    <div *ngIf="description.invalid && description.touched" style="color: red">
+      Le champ description est obligatoire.
+    </div>
+  </div>
+
+  <!-- Champ Prix -->
+  <div>
+    <label for="price">Prix :</label>
+    <input
+      type="number"
+      id="price"
+      name="price"
+      [(ngModel)]="product.price"
+      #price="ngModel"
+      min="1"
+      required
+    />
+    <div *ngIf="price.invalid && price.touched" style="color: red">
+      Le champ price doit être strictement positif.
+    </div>
+  </div>
+
+  <!-- Champ Disponible -->
+  <div>
+    <label for="available">Disponible :</label>
+    <select id="available" name="available" [(ngModel)]="product.available" required>
+      <option [value]="true">Oui</option>
+      <option [value]="false">Non</option>
+    </select>
+  </div>
+
+  <!-- Bouton d'ajout -->
+  <button type="submit" [disabled]="productForm.invalid">Ajouter</button>
+</form>
